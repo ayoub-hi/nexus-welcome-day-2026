@@ -1,0 +1,322 @@
+[
+  {
+    "question": "What does VPN stand for?",
+    "optionA": "Virtual Private Network",
+    "optionB": "Very Private Network",
+    "optionC": "Virtual Public Network",
+    "optionD": "Verified Private Network",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "Which of the following is considered a strong password practice?",
+    "optionA": "Using the same password everywhere",
+    "optionB": "Using your birthdate as password",
+    "optionC": "Using letters, numbers, and symbols",
+    "optionD": "Sharing passwords with colleagues",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is phishing?",
+    "optionA": "A type of antivirus software",
+    "optionB": "A method to encrypt all data",
+    "optionC": "A fraud to obtain sensitive data",
+    "optionD": "A firewall configuration tool",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What does SSL stand for?",
+    "optionA": "Secure Socket Layer",
+    "optionB": "System Security Layer",
+    "optionC": "Safe Socket Link",
+    "optionD": "Secure System Login",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is malware?",
+    "optionA": "Hardware that protects systems",
+    "optionB": "A type of antivirus program",
+    "optionC": "A secure email protocol system",
+    "optionD": "Software designed to harm devices",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is two-factor authentication (2FA)?",
+    "optionA": "Using two different passwords",
+    "optionB": "Having two antivirus programs",
+    "optionC": "Requiring two authentication methods",
+    "optionD": "Logging in twice to the system",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is a firewall?",
+    "optionA": "A system that controls traffic",
+    "optionB": "A physical barrier for servers",
+    "optionC": "A type of computer virus",
+    "optionD": "An encryption method for data",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What does DDoS stand for?",
+    "optionA": "Direct Denial of Service",
+    "optionB": "Digital Denial of System",
+    "optionC": "Data Denial of Service",
+    "optionD": "Distributed Denial of Service",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is ransomware?",
+    "optionA": "Software demanding payment for data",
+    "optionB": "A legal software licensing model",
+    "optionC": "A type of antivirus protection",
+    "optionD": "A cloud storage service platform",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is the purpose of encryption?",
+    "optionA": "To speed up data transmission",
+    "optionB": "To compress files for storage",
+    "optionC": "To delete all sensitive information",
+    "optionD": "To prevent unauthorized data access",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a trojan horse in cybersecurity?",
+    "optionA": "A hardware security device",
+    "optionB": "A type of network firewall",
+    "optionC": "Malware disguised as legitimate",
+    "optionD": "An encryption algorithm method",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What does HTTPS stand for?",
+    "optionA": "HyperText Transfer Protocol Secure",
+    "optionB": "High Transfer Protocol System",
+    "optionC": "HyperText Transaction Protocol Safe",
+    "optionD": "High Tech Transfer Protocol Secure",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is social engineering in cybersecurity?",
+    "optionA": "Building secure social networks",
+    "optionB": "Engineering software for media",
+    "optionC": "A programming technique method",
+    "optionD": "Manipulating people for information",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a zero-day vulnerability?",
+    "optionA": "A security flaw fixed instantly",
+    "optionB": "A completely secure system type",
+    "optionC": "A flaw exploited before patches",
+    "optionD": "A daily security update process",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is the purpose of a penetration test?",
+    "optionA": "To harm a system intentionally",
+    "optionB": "To install new software updates",
+    "optionC": "To measure internet speed tests",
+    "optionD": "To simulate a cyberattack test",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is spyware?",
+    "optionA": "Software that monitors activity",
+    "optionB": "Software for espionage movies",
+    "optionC": "A type of antivirus program",
+    "optionD": "A secure communication system",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What does CIA stand for in cybersecurity?",
+    "optionA": "Central Intelligence Agency",
+    "optionB": "Confidentiality, Integrity, Availability",
+    "optionC": "Cyber Intelligence Analysis",
+    "optionD": "Computer Integration Application",
+    "correctAnswer": "B"
+  },
+  {
+    "question": "What is a botnet?",
+    "optionA": "A network of physical robots",
+    "optionB": "A social media network service",
+    "optionC": "An antivirus program software",
+    "optionD": "Infected computers controlled remotely",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is SQL injection?",
+    "optionA": "A medical procedure technique",
+    "optionB": "A database backup method system",
+    "optionC": "Malicious SQL code in queries",
+    "optionD": "A type of encryption algorithm",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is the principle of least privilege?",
+    "optionA": "Giving users maximum system access",
+    "optionB": "Removing all user access privileges",
+    "optionC": "Making all data publicly accessible",
+    "optionD": "Granting only necessary job access",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a brute force attack?",
+    "optionA": "Physical damage to server rooms",
+    "optionB": "A powerful antivirus scan method",
+    "optionC": "Trying passwords until one works",
+    "optionD": "A type of encryption algorithm",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is end-to-end encryption?",
+    "optionA": "Encryption only at server level",
+    "optionB": "Encryption of file names only",
+    "optionC": "Temporary encryption for sessions",
+    "optionD": "Data encrypted from sender to receiver",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a man-in-the-middle attack?",
+    "optionA": "Intercepting communication between parties",
+    "optionB": "An attack on middleware software layers",
+    "optionC": "A physical security breach attempt",
+    "optionD": "A type of antivirus protection scan",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is a security patch?",
+    "optionA": "A sticker for laptop computers",
+    "optionB": "A physical security device lock",
+    "optionC": "A new antivirus feature release",
+    "optionD": "An update fixing vulnerabilities",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is the dark web?",
+    "optionA": "Websites with dark color themes",
+    "optionB": "Internet during nighttime hours",
+    "optionC": "Hidden internet for illegal activity",
+    "optionD": "A type of malware distribution",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is multi-factor authentication (MFA)?",
+    "optionA": "Using multiple different passwords",
+    "optionB": "Having multiple user account logins",
+    "optionC": "A type of encryption algorithm",
+    "optionD": "Requiring two or more verification steps",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a keylogger?",
+    "optionA": "A tool for logging system errors",
+    "optionB": "A keyboard shortcut manager tool",
+    "optionC": "Malware recording keystrokes secretly",
+    "optionD": "A password manager application",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What does APT stand for in cybersecurity?",
+    "optionA": "Advanced Persistent Threat",
+    "optionB": "Automated Protection Technology",
+    "optionC": "Applied Privacy Tool",
+    "optionD": "Active Protection Technique",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is whitelisting?",
+    "optionA": "A list of blocked applications",
+    "optionB": "A color-coding system method",
+    "optionC": "A type of malware infection",
+    "optionD": "A list of approved applications",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a vulnerability assessment?",
+    "optionA": "Identifying security weaknesses",
+    "optionB": "A personality test evaluation",
+    "optionC": "A hardware inspection process",
+    "optionD": "Software installation procedure",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is credential stuffing?",
+    "optionA": "Storing too many passwords together",
+    "optionB": "A password management technique tool",
+    "optionC": "Using stolen credentials for access",
+    "optionD": "A type of encryption methodology",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is a honeypot in cybersecurity?",
+    "optionA": "A sweet reward for hackers",
+    "optionB": "A type of malware infection",
+    "optionC": "A secure storage device system",
+    "optionD": "A decoy system attracting attackers",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is the purpose of a digital certificate?",
+    "optionA": "To verify identity and encrypt data",
+    "optionB": "To certify hardware components quality",
+    "optionC": "To provide free software licenses",
+    "optionD": "To create backups automatically daily",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is cross-site scripting (XSS)?",
+    "optionA": "A web development technique method",
+    "optionB": "A type of network firewall system",
+    "optionC": "Injecting malicious scripts in sites",
+    "optionD": "A programming language framework",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is the main purpose of antivirus software?",
+    "optionA": "To speed up your computer system",
+    "optionB": "To create backups automatically daily",
+    "optionC": "To manage passwords and credentials",
+    "optionD": "To detect and remove malware threats",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a security information and event management (SIEM) system?",
+    "optionA": "Real-time analysis of security alerts",
+    "optionB": "A type of malware infection threat",
+    "optionC": "A password manager application tool",
+    "optionD": "A hardware encryption device system",
+    "correctAnswer": "A"
+  },
+  {
+    "question": "What is pharming?",
+    "optionA": "Legitimate online shopping activity",
+    "optionB": "A type of antivirus protection",
+    "optionC": "Redirecting users to fake websites",
+    "optionD": "A farming simulation game online",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is the purpose of access control?",
+    "optionA": "To grant everyone full system access",
+    "optionB": "To control internet speed bandwidth",
+    "optionC": "To manage software license agreements",
+    "optionD": "To restrict who can use resources",
+    "correctAnswer": "D"
+  },
+  {
+    "question": "What is a rootkit?",
+    "optionA": "A legitimate admin tool software",
+    "optionB": "A plant growing app for phones",
+    "optionC": "Malware hiding privileged access",
+    "optionD": "A type of firewall protection",
+    "correctAnswer": "C"
+  },
+  {
+    "question": "What is the purpose of security awareness training?",
+    "optionA": "To teach employees how to hack",
+    "optionB": "To install antivirus software updates",
+    "optionC": "To configure firewalls automatically",
+    "optionD": "To educate about security threats",
+    "correctAnswer": "D"
+  }
+]

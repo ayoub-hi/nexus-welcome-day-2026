@@ -1,0 +1,189 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Auth.js (NextAuth) standard models, extended with our own quiz fields.
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  username      String?   @unique
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  // Only set for email/password accounts. Null for Google-only accounts.
+  password      String?
+
+  // --- Quiz-specific fields (mirrors the old CustomUser model) ---
+  points        Int       @default(0)
+  played        Boolean   @default(false)
+  year          String? // "1cp" | "2cp" | "1cs" | "2cs" | "3cs" | "other"
+  flagged       Boolean   @default(false) // anti-cheat flag (was "fa9o")
+  isAdmin       Boolean   @default(false)
+
+  accounts    Account[]
+  sessions    Session[]
+  quizAttempt QuizAttempt?
+  osintRedemptions OsintRedemption[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Single-row table holding the live event status. Read constantly (polled
+// by waiting clients), written rarely (an admin flips it). Always accessed
+// via lib/game-state.js, which pins the row to id = 1.
+// ---------------------------------------------------------------------------
+
+model GameState {
+  id        Int      @id @default(1)
+  // "not_started" | "open" | "ended"
+  status    String   @default("not_started")
+  updatedAt DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// Quiz content and server-side attempt tracking.
+// The correct answer NEVER gets serialized to the client directly -
+// only through the validated /api/quiz/submit route.
+// ---------------------------------------------------------------------------
+
+model Question {
+  id            Int     @id @default(autoincrement())
+  question      String
+  optionA       String
+  optionB       String
+  optionC       String
+  optionD       String
+  correctAnswer String // "A" | "B" | "C" | "D"
+  active        Boolean @default(true)
+}
+
+model QuizAttempt {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // JSON-encoded array of Question ids, in the shuffled order shown to this user.
+  // Storing this server-side means the submit route trusts nothing from the client
+  // about which question is which - it re-derives everything from this + the DB.
+  questionOrder String
+
+  startedAt   DateTime  @default(now())
+  expiresAt   DateTime
+  submittedAt DateTime?
+  score       Int?
+
+  // JSON-encoded snapshot of the answers actually submitted, kept for auditing/disputes.
+  answers String?
+}
+
+// ---------------------------------------------------------------------------
+// Pre-event OSINT scavenger hunt (QR code -> no-login page -> 3 challenges
+// solved in order). Each challenge has ONE fixed code, the same for every
+// solver - not minted per person. Anonymous progress (which challenges a
+// visitor has solved, for sequential unlocking) is tracked via a
+// cookie-carried session id (see lib/osint-session.js), since there's no
+// account yet at this stage. Redemption happens later, per logged-in user.
+// ---------------------------------------------------------------------------
+
+model OsintChallenge {
+  id          Int      @id @default(autoincrement())
+  // 1, 2, 3, ... - the fixed order challenges unlock in. Enforced server-side:
+  // you can't submit for order N until you've solved order N-1.
+  order       Int      @unique
+  description String
+  // JSON-encoded array of acceptable answers, e.g. ["paris","city of paris"].
+  // Compared case-insensitively after trimming/collapsing whitespace.
+  answers     String
+  // The single, fixed redeemable code for this challenge - same for everyone
+  // who solves it. Set this in prisma/osint-challenges.json, not generated
+  // at runtime.
+  code        String   @unique
+  points      Int      @default(20)
+  active      Boolean  @default(true)
+
+  solves      OsintSolve[]
+  redemptions OsintRedemption[]
+}
+
+model OsintSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  solves OsintSolve[]
+}
+
+// Records that a given anonymous session solved a given challenge. No code
+// lives here - the code is static, on OsintChallenge.
+model OsintSolve {
+  id          String   @id @default(cuid())
+  sessionId   String
+  session     OsintSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  challengeId Int
+  challenge   OsintChallenge @relation(fields: [challengeId], references: [id])
+  solvedAt    DateTime @default(now())
+
+  // One solve record per challenge per anonymous session - re-visiting a
+  // solved challenge is idempotent rather than creating duplicates.
+  @@unique([sessionId, challengeId])
+}
+
+// Records that a given USER has redeemed a given challenge's code. Since the
+// code is shared/static (not per-person), "already redeemed" is scoped per
+// user, not globally - many different people can each redeem the same code
+// once, but nobody can redeem the same challenge twice.
+model OsintRedemption {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challengeId Int
+  challenge   OsintChallenge @relation(fields: [challengeId], references: [id])
+  redeemedAt  DateTime @default(now())
+
+  @@unique([userId, challengeId])
+}

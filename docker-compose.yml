@@ -1,0 +1,18 @@
+services:
+  nexus-quiz-backend:
+    build:
+      context: .
+    container_name: nexus-quiz-backend
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    volumes:
+      # Persist the SQLite file across restarts/rebuilds.
+      - quiz-db:/app/prisma-data
+    environment:
+      # Points inside the persisted volume above.
+      DATABASE_URL: "file:/app/prisma-data/dev.db"
+
+volumes:
+  quiz-db:
