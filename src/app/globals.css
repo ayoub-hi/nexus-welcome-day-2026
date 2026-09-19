@@ -396,8 +396,45 @@ body {
   }
 }
 
+@keyframes reveal-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes champ-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(250, 204, 21, 0.55),
+      0 0 22px -8px rgba(250, 204, 21, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(250, 204, 21, 0.06),
+      0 0 42px 6px rgba(250, 204, 21, 0.35);
+  }
+}
+
 .animate-enter {
   animation: enter-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal-pop {
+  animation: reveal-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.champ-glow {
+  animation: champ-glow 1.6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -405,7 +442,9 @@ body {
   .segment-btn,
   .option-btn,
   .cyber-card,
-  .animate-enter {
+  .animate-enter,
+  .reveal-pop,
+  .champ-glow {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }

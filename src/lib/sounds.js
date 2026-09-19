@@ -64,6 +64,25 @@ export const sounds = {
     tone({ freq: 880, duration: 0.08, volume: 0.09, type: "sine" });
   },
 
+  // leaderboard single reveal; pitch climbs with the rank being shown
+  reveal(rank = 1) {
+    const step = Math.max(0, Math.min(10, rank - 1));
+    const f = 392 * Math.pow(2, step / 6);
+    tone({ freq: f, duration: 0.16, volume: 0.11, type: "triangle" });
+    tone({ freq: f * 1.5, start: 0.1, duration: 0.14, volume: 0.07, type: "sine" });
+  },
+
+  // ascending fanfare for the champion reveal
+  champion() {
+    const notes = [523.25, 659.25, 783.99, 1046.5];
+    notes.forEach((f, i) => {
+      tone({ freq: f, start: i * 0.14, duration: 0.2, volume: 0.12, type: "square" });
+      tone({ freq: f * 2, start: i * 0.14, duration: 0.16, volume: 0.05, type: "sine" });
+    });
+    tone({ freq: 1318.51, start: 0.56, duration: 0.55, volume: 0.1, type: "sine" });
+    tone({ freq: 1760, start: 0.56, duration: 0.45, volume: 0.05, type: "sine" });
+  },
+
   timeUp() {
     tone({ freq: 440, duration: 0.2, volume: 0.14, type: "sawtooth" });
     tone({ freq: 330, start: 0.2, duration: 0.3, volume: 0.14, type: "sawtooth" });
