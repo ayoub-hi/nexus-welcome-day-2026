@@ -46,7 +46,7 @@ export default function LeaderboardReveal() {
     <div className="max-w-2xl mx-auto p-6 sm:p-10">
       <div className="flex items-center justify-between mb-1">
         <h1 className="text-3xl font-bold">Leaderboard reveal</h1>
-        <Link href="/admin" className="text-sm text-zinc-400 hover:text-white">
+        <Link href="/admin" className="link-glow text-sm text-zinc-400">
           ← Back to admin
         </Link>
       </div>
@@ -67,7 +67,7 @@ export default function LeaderboardReveal() {
             <button
               onClick={() => setRevealedCount((c) => Math.min(c + 1, total))}
               disabled={done}
-              className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
+              className="btn btn-solid flex-1 py-3"
             >
               <Eye className="w-5 h-5" />
               {done ? "All revealed" : revealedCount === 0 ? "Reveal last place" : "Reveal next"}
@@ -75,13 +75,13 @@ export default function LeaderboardReveal() {
             <button
               onClick={() => setRevealedCount(total)}
               disabled={done}
-              className="px-4 bg-zinc-700 hover:bg-zinc-600 disabled:opacity-40 font-semibold rounded-xl transition"
+              className="btn btn-muted px-4 py-3"
             >
               Reveal all
             </button>
             <button
               onClick={() => setRevealedCount(0)}
-              className="px-4 bg-zinc-800 hover:bg-zinc-700 font-semibold rounded-xl transition flex items-center gap-2"
+              className="btn btn-muted px-4 py-3"
               title="Reset reveal (doesn't refetch scores)"
             >
               <RotateCcw className="w-4 h-4" />

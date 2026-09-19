@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { api, ApiError } from "@/lib/api-client";
+import { sounds } from "@/lib/sounds";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function SignupPage() {
       />
 
       {/* Signup Card */}
-      <div className="relative z-10 bg-[#1a1c1d] backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 md:p-12 w-full max-w-md text-white">
+      <div className="relative z-10 bg-[#1a1c1d] backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 md:p-12 w-full max-w-md text-white cyber-card">
         {/* Club Logo */}
         <div className="flex justify-center mb-6">
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 p-6 sm:p-4 rounded-full shadow-lg">
@@ -81,8 +82,8 @@ export default function SignupPage() {
         </div>
 
         {/* Header */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent">
-          Create Account
+        <h1 key={mode} className="text-3xl sm:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent animate-enter">
+          {mode === "login" ? "Welcome Back" : "Create Account"}
         </h1>
 
         {/* Divider */}
@@ -95,7 +96,7 @@ export default function SignupPage() {
         {/* Google Sign Up Button */}
         <button
           onClick={handleGoogle}
-          className="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl border-2 border-gray-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-3"
+          className="btn btn-google w-full px-6 sm:px-8 py-3 sm:py-3.5"
         >
           <svg className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" viewBox="0 0 24 24">
             <path
@@ -126,22 +127,28 @@ export default function SignupPage() {
         </div>
 
         {!mode ? (
-          <div className="flex gap-3">
+          <div className="segment animate-enter">
             <button
-              onClick={() => setMode("register")}
-              className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition"
+              onClick={() => {
+                sounds.click();
+                setMode("register");
+              }}
+              className="segment-btn"
             >
               Sign up
             </button>
             <button
-              onClick={() => setMode("login")}
-              className="flex-1 bg-transparent border-2 border-gray-500 hover:border-gray-300 text-white font-semibold py-3 rounded-xl transition"
+              onClick={() => {
+                sounds.click();
+                setMode("login");
+              }}
+              className="segment-btn"
             >
               Log in
             </button>
           </div>
         ) : (
-          <form onSubmit={handleEmailSubmit} className="space-y-3">
+          <form onSubmit={handleEmailSubmit} className="space-y-3 animate-enter">
             <input
               type="email"
               name="email"
@@ -149,7 +156,7 @@ export default function SignupPage() {
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 border border-gray-500 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 placeholder-gray-400 text-white"
+              className="w-full px-3 py-2.5 border border-gray-500 bg-transparent rounded-lg transition focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-500 hover:border-green-600/60 placeholder-gray-400 text-white"
             />
             <input
               type="password"
@@ -159,26 +166,29 @@ export default function SignupPage() {
               placeholder="Password (min 8 characters)"
               value={form.password}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 border border-gray-500 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 placeholder-gray-400 text-white"
+              className="w-full px-3 py-2.5 border border-gray-500 bg-transparent rounded-lg transition focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-500 hover:border-green-600/60 placeholder-gray-400 text-white"
             />
             {error && <p className="text-red-400 text-sm">{error}</p>}
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
+              className="btn btn-solid w-full py-3 sm:py-3.5 text-base"
             >
               {submitting ? "Please wait…" : mode === "register" ? "Create account" : "Log in"}
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                setMode(null);
-                setError("");
-              }}
-              className="w-full text-gray-400 text-sm hover:text-gray-200"
-            >
-              Back
-            </button>
+            <div className="flex justify-center pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  sounds.click();
+                  setMode(null);
+                  setError("");
+                }}
+                className="btn btn-ghost px-6 py-2 text-sm"
+              >
+                Back
+              </button>
+            </div>
           </form>
         )}
 

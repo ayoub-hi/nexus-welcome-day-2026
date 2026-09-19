@@ -29,7 +29,7 @@ function CodePill({ order, code, points }) {
       </div>
       <button
         onClick={copy}
-        className="shrink-0 bg-zinc-700 hover:bg-zinc-600 rounded-lg p-2 transition"
+        className="btn btn-muted shrink-0 p-2 rounded-lg"
         title="Copy code"
       >
         {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
@@ -94,14 +94,14 @@ export default function OsintPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="bg-[#1c1c1d] text-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-lg w-full">
+      <div className="bg-[#1c1c1d] text-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-lg w-full cyber-card">
         <div className="flex justify-center mb-4">
           <div className="bg-neutral-800 rounded-full w-16 h-16 flex items-center justify-center">
             <Image src="/Nexus.png" width={36} height={36} alt="Nexus" />
           </div>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-1">OSINT Warm-up</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-1 title-glow">OSINT Warm-up</h1>
         <p className="text-gray-400 text-center text-sm mb-6">
           Solve all 3 to earn bonus points. Sign up afterwards to redeem your codes.
         </p>
@@ -127,7 +127,7 @@ export default function OsintPage() {
                 </p>
                 <Link
                   href="/signup"
-                  className="block w-full bg-green-600 hover:bg-green-700 font-semibold py-3 rounded-xl transition"
+                  className="btn btn-solid w-full py-3"
                 >
                   Sign up / log in to redeem
                 </Link>
@@ -161,7 +161,7 @@ export default function OsintPage() {
                   <button
                     type="submit"
                     disabled={submitting || !answer.trim()}
-                    className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-50 font-semibold py-3 rounded-xl transition"
+                    className="btn btn-solid w-full py-3"
                   >
                     {submitting ? "Checking…" : "Submit answer"}
                   </button>

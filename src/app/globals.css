@@ -1,26 +1,412 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #060807;
+  --foreground: #e7f5ec;
+  --nexus-green: #22c55e;
+  --nexus-emerald: #10b981;
+  --card-bg: #1c1c1d;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  scrollbar-color: #14532d #0a0d0a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(34, 197, 94, 0.35);
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------------------ */
+/* Cyber buttons                                                       */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  .btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-radius: 0.85rem;
+    cursor: pointer;
+    overflow: hidden;
+    user-select: none;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease,
+      filter 0.2s ease;
+    will-change: transform;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--nexus-green);
+    outline-offset: 3px;
+  }
+
+  .btn:active {
+    transform: translateY(1px) scale(0.97);
+  }
+
+  .btn-solid {
+    color: #ffffff;
+    background: linear-gradient(135deg, #16a34a 0%, #059669 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 10px 22px -10px rgba(34, 197, 94, 0.55);
+  }
+
+  .btn-solid:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 16px 34px -12px rgba(34, 197, 94, 0.75),
+      0 0 0 1px rgba(74, 222, 128, 0.55),
+      0 0 26px -4px rgba(34, 197, 94, 0.5);
+  }
+
+  .btn-solid:active {
+    transform: translateY(1px) scale(0.97);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 8px 18px -10px rgba(34, 197, 94, 0.5);
+  }
+
+  .btn-solid:disabled,
+  .btn-outline:disabled,
+  .btn-muted:disabled,
+  .btn-google:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none;
+  }
+
+  /* shine sweep shared by filled variants */
+  .btn-solid::before,
+  .btn-muted::before,
+  .btn-outline::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 60%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.55s ease;
+    pointer-events: none;
+  }
+
+  .btn-solid:hover::before,
+  .btn-muted:hover::before,
+  .btn-outline:hover::before {
+    transform: translateX(130%);
+  }
+
+  .btn-outline {
+    color: var(--nexus-green);
+    background: rgba(34, 197, 94, 0.06);
+    border: 1px solid rgba(34, 197, 94, 0.55);
+  }
+
+  .btn-outline:hover {
+    transform: translateY(-2px) scale(1.02);
+    color: #ecfdf5;
+    background: rgba(34, 197, 94, 0.16);
+    border-color: var(--nexus-green);
+    box-shadow:
+      0 12px 28px -12px rgba(34, 197, 94, 0.6),
+      inset 0 0 18px rgba(34, 197, 94, 0.25);
+  }
+
+  .btn-muted {
+    color: #d4d4d8;
+    background: #18181b;
+    border: 1px solid #27272a;
+    box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.6);
+  }
+
+  .btn-muted:hover {
+    transform: translateY(-2px) scale(1.02);
+    color: #ffffff;
+    background: #27272a;
+    border-color: #3f3f46;
+    box-shadow:
+      0 12px 24px -12px rgba(0, 0, 0, 0.7),
+      0 0 16px -6px rgba(34, 197, 94, 0.4);
+  }
+
+  .btn-ghost {
+    color: #9ca3af;
+    background: transparent;
+  }
+
+  .btn-ghost:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .btn-google {
+    color: #3f3f46;
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .btn-google:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: #fafafa;
+    box-shadow:
+      0 12px 26px -12px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(34, 197, 94, 0.4),
+      0 0 18px -6px rgba(34, 197, 94, 0.25);
+  }
+
+  /* segmented choice control (sign up / log in) */
+  .segment {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.375rem;
+    padding: 0.375rem;
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .segment-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #a1a1aa;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.25s ease,
+      transform 0.15s ease;
+  }
+
+  .segment-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .segment-btn:active {
+    transform: scale(0.97);
+  }
+
+  .segment-btn:focus-visible {
+    outline: 2px solid var(--nexus-green);
+    outline-offset: 2px;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Quiz answer options                                                */
+  /* ------------------------------------------------------------------ */
+
+  .option-btn {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid #4b5563;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.25s ease,
+      transform 0.15s ease;
+  }
+
+  .option-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(34, 197, 94, 0.12) 50%,
+      transparent 60%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--nexus-green);
+    background: rgba(34, 197, 94, 0.12);
+    box-shadow:
+      0 10px 22px -12px rgba(34, 197, 94, 0.55),
+      inset 0 0 14px rgba(34, 197, 94, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .option-btn:hover::before {
+    transform: translateX(130%);
+  }
+
+  .option-btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .option-btn:disabled {
+    opacity: 0.75;
+    cursor: default;
+  }
+
+  .option-btn--selected {
+    border-color: var(--nexus-green) !important;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(34, 197, 94, 0.25)) !important;
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.4),
+      0 0 24px -6px rgba(34, 197, 94, 0.6) !important;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Cards, titles, links                                               */
+  /* ------------------------------------------------------------------ */
+
+  .cyber-card {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+      0 24px 60px -26px rgba(0, 0, 0, 0.85),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+
+  .cyber-card:hover {
+    border-color: rgba(34, 197, 94, 0.3);
+    box-shadow:
+      0 28px 70px -28px rgba(0, 0, 0, 0.9),
+      0 0 44px -16px rgba(34, 197, 94, 0.4);
+  }
+
+  .brackets::before,
+  .brackets::after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .brackets::before {
+    top: 9px;
+    left: 9px;
+    border-top: 2px solid rgba(34, 197, 94, 0.75);
+    border-left: 2px solid rgba(34, 197, 94, 0.75);
+    border-top-left-radius: 10px;
+  }
+
+  .brackets::after {
+    bottom: 9px;
+    right: 9px;
+    border-bottom: 2px solid rgba(34, 197, 94, 0.75);
+    border-right: 2px solid rgba(34, 197, 94, 0.75);
+    border-bottom-right-radius: 10px;
+  }
+
+  .title-glow {
+    text-shadow:
+      0 0 22px rgba(34, 197, 94, 0.55),
+      0 0 70px rgba(34, 197, 94, 0.28);
+  }
+
+  .link-glow {
+    position: relative;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+  }
+
+  .link-glow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--nexus-green), transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+  }
+
+  .link-glow:hover {
+    color: #ecfdf5;
+    text-shadow: 0 0 12px rgba(34, 197, 94, 0.6);
+  }
+
+  .link-glow:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-enter {
+  animation: enter-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .segment-btn,
+  .option-btn,
+  .cyber-card,
+  .animate-enter {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
