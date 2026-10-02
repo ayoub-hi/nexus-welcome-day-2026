@@ -24,7 +24,7 @@ export default function ClubWelcomePage() {
       ></div>
       
       <div className="relative z-10 w-full max-w-md">
-        <div className="bg-[#1a1c1d] px-6 sm:px-12 py-10 sm:py-14 rounded-3xl text-center shadow-2xl flex flex-col items-center cyber-card brackets">
+        <div className="bg-[#1a1c1d] px-6 sm:px-12 py-10 sm:py-14 rounded-3xl text-center shadow-2xl flex flex-col items-center">
           {/* Logo Container */}
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 p-6 sm:p-5 rounded-full mb-6 shadow-lg">
             <Image
@@ -37,17 +37,17 @@ export default function ClubWelcomePage() {
           </div>
           
           {/* Welcome Text */}
-          <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 text-3xl sm:text-4xl md:text-5xl font-bold mb-3 tracking-tight leading-tight title-glow">
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 text-3xl sm:text-4xl md:text-5xl font-bold mb-3 tracking-tight leading-tight">
             Welcome To Our Club!
           </h1>
           
-          <p className="text-gray-400 text-sm sm:text-base mb-8 sm:mb-10 max-w-sm">
+          <p className="text-gray-600 text-sm sm:text-base mb-8 sm:mb-10 max-w-sm">
             Join us on an exciting journey
           </p>
           
           {/* Start Button */}
-          <button
-            className="btn btn-solid px-10 sm:px-12 py-3.5 sm:py-4 text-base sm:text-lg w-full sm:w-auto title-glow"
+          <button 
+            className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-10 sm:px-12 py-3.5 sm:py-4 text-base sm:text-lg rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 shadow-lg w-full sm:w-auto" 
             onClick={handleStart}
           >
             Start From Here

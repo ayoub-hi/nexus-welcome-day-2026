@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { api, ApiError } from "@/lib/api-client";
 import { useGameStatus } from "@/lib/use-game-status";
-import { sounds } from "@/lib/sounds";
 
 function progressKey(attemptId) {
   return `quizProgress:${attemptId}`;
@@ -28,7 +27,6 @@ const CyberQuizApp = () => {
   const [timeLeft, setTimeLeft] = useState(0);
 
   const submittingRef = useRef(false);
-  const prevTimeLeft = useRef(null);
   const gameStatus = useGameStatus();
 
   // --- Fetch (or resume) the attempt on mount -----------------------------
@@ -118,30 +116,7 @@ const CyberQuizApp = () => {
 
     const tick = () => {
       const remaining = Math.max(0, Math.round((expiresAt - Date.now()) / 1000));
-      const prev = prevTimeLeft.current;
-      prevTimeLeft.current = remaining;
       setTimeLeft(remaining);
-
-      if (prev !== null && prev !== remaining) {
-        if (remaining > 0) {
-          // entering the final minute -> urgent alert motif
-          if (remaining === 60) {
-            sounds.lastMinute();
-          } else if (remaining % 60 === 0) {
-            // other whole-minute marks -> regular chime
-            sounds.minute();
-          } else if (remaining <= 10) {
-            // last 10 seconds -> fast, rising beeps
-            sounds.beep();
-          } else {
-            // inside the final minute -> per-second pressure tick
-            sounds.tick(remaining);
-          }
-        } else {
-          sounds.timeUp();
-        }
-      }
-
       if (remaining <= 0) {
         submit(answers);
       }
@@ -153,11 +128,7 @@ const CyberQuizApp = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, expiresAt]);
 
-  const startQuiz = () => {
-    prevTimeLeft.current = null;
-    sounds.start();
-    setPhase("playing");
-  };
+  const startQuiz = () => setPhase("playing");
 
   const persistProgress = (nextIndex, nextAnswers) => {
     if (!attemptId) return;
@@ -170,7 +141,6 @@ const CyberQuizApp = () => {
   const handleAnswerSelect = (letter) => {
     if (selected) return;
     setSelected(letter);
-    sounds.answer();
 
     const currentQuestion = questions[currentIndex];
     const nextAnswers = { ...answers, [currentQuestion.id]: letter };
@@ -201,11 +171,11 @@ const CyberQuizApp = () => {
   if (phase === "error") {
     return (
       <div className="h-screen flex items-center justify-center bg-zinc-900 text-white p-4">
-        <div className="bg-[#1c1c1d] rounded-2xl p-8 max-w-md text-center cyber-card">
+        <div className="bg-[#1c1c1d] rounded-2xl p-8 max-w-md text-center">
           <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="btn btn-solid px-5 py-2.5"
+            className="bg-green-600 hover:bg-green-700 px-5 py-2.5 rounded-lg font-semibold"
           >
             Retry
           </button>
@@ -217,11 +187,11 @@ const CyberQuizApp = () => {
   if (phase === "intro") {
     return (
       <div className="h-screen bg-[url('/vector.svg')] bg-cover bg-center flex items-center justify-center p-3 sm:p-4 overflow-hidden">
-        <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center max-h-[95vh] overflow-y-auto text-white cyber-card">
+        <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center max-h-[95vh] overflow-y-auto text-white">
           <div className="bg-neutral-800 rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6">
             <Image src="/Nexus.png" width={48} height={48} alt="nexus" className="w-10 h-10 sm:w-12 sm:h-12" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 title-glow">Cyber Security Quiz</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Cyber Security Quiz</h2>
           <p className="text-sm sm:text-base text-white mb-5 sm:mb-6">
             Test your knowledge with {questions.length} questions.
             <br />
@@ -229,7 +199,7 @@ const CyberQuizApp = () => {
           </p>
           <button
             onClick={startQuiz}
-            className="btn btn-solid w-full py-3 sm:py-4 px-5 sm:px-6 text-base sm:text-lg"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 sm:py-4 px-5 sm:px-6 rounded-lg transition flex items-center justify-center gap-2 text-base sm:text-lg"
           >
             <Play className="w-5 h-5 sm:w-6 sm:h-6" />
             Start Quiz
@@ -245,7 +215,7 @@ const CyberQuizApp = () => {
 
   return (
     <div className="h-screen bg-[url('/vector.svg')] bg-cover bg-center flex items-center justify-center p-3 sm:p-4 overflow-hidden">
-      <div className="bg-[#1c1c1d] text-white rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-2xl w-full max-h-[95vh] overflow-y-auto cyber-card">
+      <div className="bg-[#1c1c1d] text-white rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-2xl w-full max-h-[95vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4 sm:mb-6">
           <div className="text-xs sm:text-sm font-semibold text-white">
             Question {currentIndex + 1}/{questions.length}
@@ -272,7 +242,10 @@ const CyberQuizApp = () => {
         <div className="space-y-2 sm:space-y-3">
           {Object.entries(currentQuestion.options).map(([key, value]) => {
             const isSelected = selected === key;
-            const buttonClass = isSelected ? "option-btn option-btn--selected" : "option-btn";
+            let buttonClass = "w-full text-left p-3 sm:p-4 rounded-lg border-2 transition-all ";
+            buttonClass += isSelected
+              ? "border-blue-500 bg-blue-900"
+              : "border-gray-600 hover:border-blue-400 hover:bg-gray-800";
 
             return (
               <button

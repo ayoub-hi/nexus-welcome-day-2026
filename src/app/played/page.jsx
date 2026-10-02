@@ -40,13 +40,13 @@ export default function PlayedPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="relative z-10 flex flex-col items-center gap-6 px-8 py-12 bg-[#1a1c1d] rounded-3xl shadow-2xl max-w-md mx-4 cyber-card brackets">
+      <div className="relative z-10 flex flex-col items-center gap-6 px-8 py-12 bg-[#1a1c1d] rounded-3xl shadow-2xl max-w-md mx-4">
         <div className="w-28 h-28 md:w-32 md:h-32 relative bg-gradient-to-br from-gray-900 to-gray-900 rounded-full p-6 shadow-lg">
           <Image src="/Nexus.png" alt="Nexus Club Logo" fill className="object-contain p-6" />
         </div>
 
         <div className="text-center space-y-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-white title-glow">You're all set!</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">You're all set!</h1>
           <p className="text-gray-300 text-sm md:text-base">Thanks for playing the quiz.</p>
         </div>
 
