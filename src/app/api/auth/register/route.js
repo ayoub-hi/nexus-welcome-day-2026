@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { YEARS } from "@/lib/years";
 import { jsonError, withCors, corsPreflight, rateLimit, getClientIp } from "@/lib/api-utils";
 
-const YEAR_CHOICES = ["1cp", "2cp", "1cs", "2cs", "3cs"];
+const YEAR_CHOICES = YEARS;
 
 const registerSchema = z.object({
   email: z.string().trim().toLowerCase().email(),

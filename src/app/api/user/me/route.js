@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { YEARS } from "@/lib/years";
 import { requireUser, jsonError, withCors, corsPreflight } from "@/lib/api-utils";
 
-const YEAR_CHOICES = ["1cp", "2cp", "1cs", "2cs", "3cs"];
+const YEAR_CHOICES = YEARS;
 
 // Deliberately narrow. The old Django serializer used fields = "__all__",
 // which meant a PATCH to /auth/user/ could overwrite `points`, `played`,
@@ -68,6 +69,15 @@ export async function PATCH(request) {
       }),
       origin
     );
+  }
+
+  // Year decides which question pool and which leaderboard a player belongs to,
+  // so it is frozen once they've started (or finished) the quiz.
+  if (parsed.data.year && parsed.data.year !== user.year) {
+    const attempt = await prisma.quizAttempt.findUnique({ where: { userId: user.id }, select: { id: true } });
+    if (user.played || attempt) {
+      return withCors(jsonError("You can't change your year after starting the quiz.", 403), origin);
+    }
   }
 
   const updated = await prisma.user

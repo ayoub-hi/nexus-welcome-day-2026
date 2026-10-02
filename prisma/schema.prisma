@@ -101,6 +101,12 @@ model Question {
   optionD       String
   correctAnswer String // "A" | "B" | "C" | "D"
   active        Boolean @default(true)
+
+  // Which year this question belongs to: "1cp" | "2cp" | "1cs" | "2cs" | "3cs",
+  // or "all" for a shared question served to every year.
+  year          String  @default("all")
+
+  @@index([year])
 }
 
 model QuizAttempt {

@@ -4,16 +4,19 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Trophy, Medal, Award, Eye, RotateCcw } from "lucide-react";
 import { api, ApiError } from "@/lib/api-client";
+import { YEARS, YEAR_LABELS } from "@/lib/years";
 
 export default function LeaderboardReveal() {
   const [players, setPlayers] = useState(null); // null = not loaded yet
   const [error, setError] = useState("");
   const [revealedCount, setRevealedCount] = useState(0);
+  const [year, setYear] = useState(YEARS[0]);
 
-  const load = async () => {
+  const load = async (y = year) => {
     setError("");
+    setPlayers(null);
     try {
-      const data = await api.get("/api/admin/scoreboard");
+      const data = await api.get(`/api/admin/scoreboard?year=${y}`);
       setPlayers(data.players); // already sorted desc by points - rank 1 first
       setRevealedCount(0);
     } catch (err) {
@@ -21,9 +24,10 @@ export default function LeaderboardReveal() {
     }
   };
 
+  // Each year has its own board - reload whenever the selected year changes.
   useEffect(() => {
-    load();
-  }, []);
+    load(year);
+  }, [year]);
 
   // Reveal order runs worst -> best, so the winner is always revealed last.
   const revealOrder = useMemo(() => (players ? [...players].reverse() : []), [players]);
@@ -45,7 +49,7 @@ export default function LeaderboardReveal() {
   return (
     <div className="max-w-2xl mx-auto p-6 sm:p-10">
       <div className="flex items-center justify-between mb-1">
-        <h1 className="text-3xl font-bold">Leaderboard reveal</h1>
+        <h1 className="text-3xl font-bold">Leaderboard reveal · {YEAR_LABELS[year]}</h1>
         <Link href="/admin" className="text-sm text-zinc-400 hover:text-white">
           ← Back to admin
         </Link>
@@ -55,12 +59,28 @@ export default function LeaderboardReveal() {
         pull if scores changed since.
       </p>
 
+      <div className="flex flex-wrap gap-2 mb-6">
+        {YEARS.map((y) => (
+          <button
+            key={y}
+            onClick={() => setYear(y)}
+            className={`px-4 py-2 rounded-xl font-semibold text-sm transition border-2 ${
+              year === y
+                ? "border-green-500 bg-green-900/30 text-white"
+                : "border-zinc-700 text-zinc-400 hover:border-zinc-500"
+            }`}
+          >
+            {YEAR_LABELS[y]}
+          </button>
+        ))}
+      </div>
+
       {error && <p className="text-red-400 mb-4">{error}</p>}
 
       {!players ? (
         <p className="text-zinc-400">Loading…</p>
       ) : players.length === 0 ? (
-        <p className="text-zinc-400">No one has played yet.</p>
+        <p className="text-zinc-400">No one from {YEAR_LABELS[year]} has played yet.</p>
       ) : (
         <>
           <div className="flex gap-3 mb-6">

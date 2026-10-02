@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { SHARED_YEAR, YEARS } from "@/lib/years";
 import { requireUser, jsonError, withCors, corsPreflight, rateLimit, getClientIp } from "@/lib/api-utils";
 
 const QUIZ_DURATION_SECONDS = Number(process.env.QUIZ_DURATION_SECONDS || 213);
@@ -43,6 +44,11 @@ export async function POST(request) {
     return withCors(jsonError("You have already played the quiz.", 403), origin);
   }
 
+  // Questions are split by year, so we need to know which pool to draw from.
+  if (!user.year || !YEARS.includes(user.year)) {
+    return withCors(jsonError("Please select your year before starting the quiz.", 400), origin);
+  }
+
   const existing = await prisma.quizAttempt.findUnique({ where: { userId: user.id } });
 
   if (existing) {
@@ -83,9 +89,12 @@ export async function POST(request) {
     );
   }
 
-  const pool = await prisma.question.findMany({ where: { active: true } });
+  // Only this player's year, plus any questions explicitly marked as shared.
+  const pool = await prisma.question.findMany({
+    where: { active: true, year: { in: [user.year, SHARED_YEAR] } },
+  });
   if (pool.length === 0) {
-    return withCors(jsonError("No questions are configured yet.", 500), origin);
+    return withCors(jsonError("No questions are configured for your year yet.", 500), origin);
   }
 
   const shuffled = shuffle(pool);

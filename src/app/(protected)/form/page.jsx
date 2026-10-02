@@ -91,8 +91,12 @@ function ProfileForm() {
 
   // Prefill username if they already have one (e.g. returning credentials user).
   useEffect(() => {
-    if (session?.user?.username) {
-      setFormData((f) => ({ ...f, username: session.user.username }));
+    if (session?.user?.username || session?.user?.year) {
+      setFormData((f) => ({
+        ...f,
+        username: session.user.username || f.username,
+        year: session.user.year || f.year,
+      }));
     }
   }, [session]);
 
@@ -179,6 +183,7 @@ function ProfileForm() {
             <option value="2cs">2CS</option>
             <option value="3cs">3CS</option>
           </select>
+          <p className="text-xs text-gray-400 mt-1">Your year decides your questions and leaderboard, and can't be changed once you start.</p>
           {formErrors.year && <p className="text-red-500 text-sm mt-1">{formErrors.year}</p>}
         </div>
 

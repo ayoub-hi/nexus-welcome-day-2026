@@ -5,7 +5,8 @@
     "optionB": "Very Private Network",
     "optionC": "Virtual Public Network",
     "optionD": "Verified Private Network",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "Which of the following is considered a strong password practice?",
@@ -13,7 +14,8 @@
     "optionB": "Using your birthdate as password",
     "optionC": "Using letters, numbers, and symbols",
     "optionD": "Sharing passwords with colleagues",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is phishing?",
@@ -21,7 +23,8 @@
     "optionB": "A method to encrypt all data",
     "optionC": "A fraud to obtain sensitive data",
     "optionD": "A firewall configuration tool",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What does SSL stand for?",
@@ -29,7 +32,8 @@
     "optionB": "System Security Layer",
     "optionC": "Safe Socket Link",
     "optionD": "Secure System Login",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is malware?",
@@ -37,7 +41,8 @@
     "optionB": "A type of antivirus program",
     "optionC": "A secure email protocol system",
     "optionD": "Software designed to harm devices",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is two-factor authentication (2FA)?",
@@ -45,7 +50,8 @@
     "optionB": "Having two antivirus programs",
     "optionC": "Requiring two authentication methods",
     "optionD": "Logging in twice to the system",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is a firewall?",
@@ -53,7 +59,8 @@
     "optionB": "A physical barrier for servers",
     "optionC": "A type of computer virus",
     "optionD": "An encryption method for data",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What does DDoS stand for?",
@@ -61,7 +68,8 @@
     "optionB": "Digital Denial of System",
     "optionC": "Data Denial of Service",
     "optionD": "Distributed Denial of Service",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is ransomware?",
@@ -69,7 +77,8 @@
     "optionB": "A legal software licensing model",
     "optionC": "A type of antivirus protection",
     "optionD": "A cloud storage service platform",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is the purpose of encryption?",
@@ -77,7 +86,8 @@
     "optionB": "To compress files for storage",
     "optionC": "To delete all sensitive information",
     "optionD": "To prevent unauthorized data access",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a trojan horse in cybersecurity?",
@@ -85,7 +95,8 @@
     "optionB": "A type of network firewall",
     "optionC": "Malware disguised as legitimate",
     "optionD": "An encryption algorithm method",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What does HTTPS stand for?",
@@ -93,7 +104,8 @@
     "optionB": "High Transfer Protocol System",
     "optionC": "HyperText Transaction Protocol Safe",
     "optionD": "High Tech Transfer Protocol Secure",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is social engineering in cybersecurity?",
@@ -101,7 +113,8 @@
     "optionB": "Engineering software for media",
     "optionC": "A programming technique method",
     "optionD": "Manipulating people for information",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a zero-day vulnerability?",
@@ -109,7 +122,8 @@
     "optionB": "A completely secure system type",
     "optionC": "A flaw exploited before patches",
     "optionD": "A daily security update process",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is the purpose of a penetration test?",
@@ -117,7 +131,8 @@
     "optionB": "To install new software updates",
     "optionC": "To measure internet speed tests",
     "optionD": "To simulate a cyberattack test",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is spyware?",
@@ -125,7 +140,8 @@
     "optionB": "Software for espionage movies",
     "optionC": "A type of antivirus program",
     "optionD": "A secure communication system",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What does CIA stand for in cybersecurity?",
@@ -133,7 +149,8 @@
     "optionB": "Confidentiality, Integrity, Availability",
     "optionC": "Cyber Intelligence Analysis",
     "optionD": "Computer Integration Application",
-    "correctAnswer": "B"
+    "correctAnswer": "B",
+    "year": "all"
   },
   {
     "question": "What is a botnet?",
@@ -141,7 +158,8 @@
     "optionB": "A social media network service",
     "optionC": "An antivirus program software",
     "optionD": "Infected computers controlled remotely",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is SQL injection?",
@@ -149,7 +167,8 @@
     "optionB": "A database backup method system",
     "optionC": "Malicious SQL code in queries",
     "optionD": "A type of encryption algorithm",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is the principle of least privilege?",
@@ -157,7 +176,8 @@
     "optionB": "Removing all user access privileges",
     "optionC": "Making all data publicly accessible",
     "optionD": "Granting only necessary job access",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a brute force attack?",
@@ -165,7 +185,8 @@
     "optionB": "A powerful antivirus scan method",
     "optionC": "Trying passwords until one works",
     "optionD": "A type of encryption algorithm",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is end-to-end encryption?",
@@ -173,7 +194,8 @@
     "optionB": "Encryption of file names only",
     "optionC": "Temporary encryption for sessions",
     "optionD": "Data encrypted from sender to receiver",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a man-in-the-middle attack?",
@@ -181,7 +203,8 @@
     "optionB": "An attack on middleware software layers",
     "optionC": "A physical security breach attempt",
     "optionD": "A type of antivirus protection scan",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is a security patch?",
@@ -189,7 +212,8 @@
     "optionB": "A physical security device lock",
     "optionC": "A new antivirus feature release",
     "optionD": "An update fixing vulnerabilities",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is the dark web?",
@@ -197,7 +221,8 @@
     "optionB": "Internet during nighttime hours",
     "optionC": "Hidden internet for illegal activity",
     "optionD": "A type of malware distribution",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is multi-factor authentication (MFA)?",
@@ -205,7 +230,8 @@
     "optionB": "Having multiple user account logins",
     "optionC": "A type of encryption algorithm",
     "optionD": "Requiring two or more verification steps",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a keylogger?",
@@ -213,7 +239,8 @@
     "optionB": "A keyboard shortcut manager tool",
     "optionC": "Malware recording keystrokes secretly",
     "optionD": "A password manager application",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What does APT stand for in cybersecurity?",
@@ -221,7 +248,8 @@
     "optionB": "Automated Protection Technology",
     "optionC": "Applied Privacy Tool",
     "optionD": "Active Protection Technique",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is whitelisting?",
@@ -229,7 +257,8 @@
     "optionB": "A color-coding system method",
     "optionC": "A type of malware infection",
     "optionD": "A list of approved applications",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a vulnerability assessment?",
@@ -237,7 +266,8 @@
     "optionB": "A personality test evaluation",
     "optionC": "A hardware inspection process",
     "optionD": "Software installation procedure",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is credential stuffing?",
@@ -245,7 +275,8 @@
     "optionB": "A password management technique tool",
     "optionC": "Using stolen credentials for access",
     "optionD": "A type of encryption methodology",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is a honeypot in cybersecurity?",
@@ -253,7 +284,8 @@
     "optionB": "A type of malware infection",
     "optionC": "A secure storage device system",
     "optionD": "A decoy system attracting attackers",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is the purpose of a digital certificate?",
@@ -261,7 +293,8 @@
     "optionB": "To certify hardware components quality",
     "optionC": "To provide free software licenses",
     "optionD": "To create backups automatically daily",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is cross-site scripting (XSS)?",
@@ -269,7 +302,8 @@
     "optionB": "A type of network firewall system",
     "optionC": "Injecting malicious scripts in sites",
     "optionD": "A programming language framework",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is the main purpose of antivirus software?",
@@ -277,7 +311,8 @@
     "optionB": "To create backups automatically daily",
     "optionC": "To manage passwords and credentials",
     "optionD": "To detect and remove malware threats",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a security information and event management (SIEM) system?",
@@ -285,7 +320,8 @@
     "optionB": "A type of malware infection threat",
     "optionC": "A password manager application tool",
     "optionD": "A hardware encryption device system",
-    "correctAnswer": "A"
+    "correctAnswer": "A",
+    "year": "all"
   },
   {
     "question": "What is pharming?",
@@ -293,7 +329,8 @@
     "optionB": "A type of antivirus protection",
     "optionC": "Redirecting users to fake websites",
     "optionD": "A farming simulation game online",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is the purpose of access control?",
@@ -301,7 +338,8 @@
     "optionB": "To control internet speed bandwidth",
     "optionC": "To manage software license agreements",
     "optionD": "To restrict who can use resources",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   },
   {
     "question": "What is a rootkit?",
@@ -309,7 +347,8 @@
     "optionB": "A plant growing app for phones",
     "optionC": "Malware hiding privileged access",
     "optionD": "A type of firewall protection",
-    "correctAnswer": "C"
+    "correctAnswer": "C",
+    "year": "all"
   },
   {
     "question": "What is the purpose of security awareness training?",
@@ -317,6 +356,7 @@
     "optionB": "To install antivirus software updates",
     "optionC": "To configure firewalls automatically",
     "optionD": "To educate about security threats",
-    "correctAnswer": "D"
+    "correctAnswer": "D",
+    "year": "all"
   }
 ]

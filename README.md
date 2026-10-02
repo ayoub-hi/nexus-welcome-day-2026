@@ -319,3 +319,13 @@ traversal). Both are build-time-only and only exploitable if the build
 process is fed attacker-controlled CSS/source maps, which nothing here
 does. Fixing them means jumping to Next 16, which isn't validated against
 `next-auth@5` beta yet — worth revisiting once that combination is stable.
+
+## Per-year questions & leaderboards
+
+- Every `Question` has a `year` (`1cp`, `2cp`, `1cs`, `2cs`, `3cs`, or `all` = shared by every year).
+- `/api/quiz/start` draws only from the player's year (+ `all`). Players must have a year set.
+- A player's year is locked once they start the quiz (`PATCH /api/user/me` returns 403 after that).
+- `GET /api/admin/scoreboard?year=1cp` returns one year's board; `/admin/leaderboard` has a tab per year.
+- Add questions per year: `npm run questions:import -- prisma/questions-1cp.json 1cp`
+- After pulling this change run: `npx prisma migrate dev --name question-year`
+  (existing questions get `year = "all"`, so nothing breaks until you assign them).

@@ -13,7 +13,9 @@ async function main() {
     console.log(`==> Question table already has ${existingCount} rows, skipping seed.`);
     console.log("    (delete rows or the dev.db file first if you want to reseed)");
   } else {
-    await prisma.question.createMany({ data: questions });
+    await prisma.question.createMany({
+      data: questions.map((q) => ({ ...q, year: q.year || "all" })),
+    });
     console.log(`==> Seeded ${questions.length} questions.`);
   }
 
