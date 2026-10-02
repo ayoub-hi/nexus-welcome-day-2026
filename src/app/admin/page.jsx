@@ -61,7 +61,7 @@ export default function AdminDashboard() {
       <h1 className="text-3xl font-bold mb-1">Admin</h1>
       <p className="text-zinc-400 mb-8">Control the live event status. Connected clients pick this up within ~4 seconds.</p>
 
-      <div className="bg-[#1c1c1d] rounded-2xl p-6 mb-6">
+      <div className="bg-[#1c1c1d] rounded-2xl p-6 mb-6 cyber-card">
         <h2 className="text-lg font-semibold mb-4">Event status</h2>
 
         {loading ? (
@@ -73,11 +73,11 @@ export default function AdminDashboard() {
                 key={opt.value}
                 onClick={() => changeStatus(opt.value)}
                 disabled={updating}
-                className={`w-full text-left p-4 rounded-xl border-2 transition ${
+                className={`w-full text-left p-4 rounded-xl border-2 transition transform ${
                   status === opt.value
-                    ? "border-green-500 bg-green-900/30"
-                    : "border-zinc-700 hover:border-zinc-500"
-                } disabled:opacity-50`}
+                    ? "border-green-500 bg-green-900/30 shadow-[0_0_28px_-8px_rgba(34,197,94,0.55)]"
+                    : "border-zinc-700 hover:border-green-500 hover:bg-green-900/10 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-14px_rgba(34,197,94,0.5)]"
+                } disabled:opacity-50 active:translate-y-0`}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">{opt.label}</span>
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
 
       <Link
         href="/admin/leaderboard"
-        className="block w-full text-center bg-green-600 hover:bg-green-700 font-semibold py-3 rounded-xl transition"
+        className="btn btn-solid w-full py-3"
       >
         Open leaderboard reveal
       </Link>

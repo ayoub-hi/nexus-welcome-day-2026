@@ -31,7 +31,7 @@ function RedeemCodeCard() {
   };
 
   return (
-    <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 max-w-md w-full text-white">
+    <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 max-w-md w-full text-white cyber-card">
       <div className="flex items-center gap-2 mb-3">
         <Gift className="w-5 h-5 text-green-400" />
         <h3 className="font-semibold">Got a bonus code?</h3>
@@ -60,7 +60,7 @@ function RedeemCodeCard() {
         <button
           type="submit"
           disabled={submitting || !code.trim()}
-          className="bg-green-600 hover:bg-green-700 disabled:opacity-50 font-semibold px-4 rounded-lg transition text-sm"
+          className="btn btn-solid px-4 py-2 text-sm"
         >
           {submitting ? "…" : "Redeem"}
         </button>
@@ -141,7 +141,7 @@ function ProfileForm() {
   };
 
   return (
-    <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-white">
+    <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-white cyber-card">
       <div className="bg-neutral-800 rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6">
         <Image src="/Nexus.png" width={48} height={48} alt="nexus" className="w-10 h-10 sm:w-12 sm:h-12" />
       </div>
@@ -187,7 +187,7 @@ function ProfileForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 sm:py-4 px-5 sm:px-6 rounded-lg transition text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn btn-solid w-full py-3 text-base sm:text-lg"
         >
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
