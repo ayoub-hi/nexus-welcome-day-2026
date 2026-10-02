@@ -15,7 +15,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState("");
-  const [osintStats, setOsintStats] = useState(null);
+  const [bonusCodes, setBonusCodes] = useState(null);
 
   const load = async () => {
     try {
@@ -28,10 +28,10 @@ export default function AdminDashboard() {
     }
   };
 
-  const loadOsintStats = async () => {
+  const loadBonusCodes = async () => {
     try {
-      const data = await api.get("/api/admin/osint-stats");
-      setOsintStats(data.challenges);
+      const data = await api.get("/api/admin/bonus-codes");
+      setBonusCodes(data.codes);
     } catch {
       // non-critical - just don't show the section
     }
@@ -39,7 +39,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     load();
-    loadOsintStats();
+    loadBonusCodes();
   }, []);
 
   const changeStatus = async (next) => {
@@ -94,27 +94,26 @@ export default function AdminDashboard() {
         {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
       </div>
 
-      {osintStats && osintStats.length > 0 && (
+      {bonusCodes && bonusCodes.length > 0 && (
         <div className="bg-[#1c1c1d] rounded-2xl p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">OSINT warm-up (pre-event)</h2>
+          <h2 className="text-lg font-semibold mb-4">Bonus codes</h2>
+          <p className="text-xs text-zinc-500 mb-4">
+            Hand these out however you like (Instagram, a physical event, etc.) - redeemable on /form once,
+            per user, until someone starts the quiz or the event ends. Add more with{" "}
+            <code className="text-zinc-400">npm run code:add -- &lt;points&gt; [label]</code>.
+          </p>
           <div className="space-y-2">
-            {osintStats.map((c) => (
-              <div key={c.order} className="flex items-center justify-between text-sm border-b border-zinc-800 pb-2">
+            {bonusCodes.map((c) => (
+              <div key={c.code} className="flex items-center justify-between text-sm border-b border-zinc-800 pb-2">
                 <span className="text-zinc-300">
-                  #{c.order} · <code className="text-zinc-400">{c.code}</code> · {c.points} pts
+                  <code className="text-zinc-400">{c.code}</code> · {c.points} pts
+                  {c.label && <span className="text-zinc-500"> · {c.label}</span>}
                   {!c.active && <span className="text-zinc-600"> (inactive)</span>}
                 </span>
-                <span className="text-zinc-400">
-                  {c.redeemed} redeemed / {c.solved} solved
-                </span>
+                <span className="text-zinc-400">{c.redeemed} redeemed</span>
               </div>
             ))}
           </div>
-          <p className="text-xs text-zinc-500 mt-3">
-            Public link: <code className="text-zinc-400">/guvoruc3k4</code> — put this behind your event's QR
-            code. It's an unlisted URL on purpose (not linked from anywhere in the app), so treat the QR code
-            image itself as the thing to keep private until the event.
-          </p>
         </div>
       )}
 

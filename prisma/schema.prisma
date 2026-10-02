@@ -32,7 +32,7 @@ model User {
   accounts    Account[]
   sessions    Session[]
   quizAttempt QuizAttempt?
-  osintRedemptions OsintRedemption[]
+  codeRedemptions CodeRedemption[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -123,67 +123,37 @@ model QuizAttempt {
 }
 
 // ---------------------------------------------------------------------------
-// Pre-event OSINT scavenger hunt (QR code -> no-login page -> 3 challenges
-// solved in order). Each challenge has ONE fixed code, the same for every
-// solver - not minted per person. Anonymous progress (which challenges a
-// visitor has solved, for sequential unlocking) is tracked via a
-// cookie-carried session id (see lib/osint-session.js), since there's no
-// account yet at this stage. Redemption happens later, per logged-in user.
+// Bonus codes: a flat list of admin-defined codes, each redeemable once per
+// user for a fixed number of points. There's no in-app challenge attached
+// to these anymore - they're earned on other platforms/events entirely
+// (Instagram, physical scavenger hunts, whatever) and just typed in here.
 // ---------------------------------------------------------------------------
 
-model OsintChallenge {
-  id          Int      @id @default(autoincrement())
-  // 1, 2, 3, ... - the fixed order challenges unlock in. Enforced server-side:
-  // you can't submit for order N until you've solved order N-1.
-  order       Int      @unique
-  description String
-  // JSON-encoded array of acceptable answers, e.g. ["paris","city of paris"].
-  // Compared case-insensitively after trimming/collapsing whitespace.
-  answers     String
-  // The single, fixed redeemable code for this challenge - same for everyone
-  // who solves it. Set this in prisma/osint-challenges.json, not generated
-  // at runtime.
-  code        String   @unique
-  points      Int      @default(20)
-  active      Boolean  @default(true)
+model BonusCode {
+  id     Int    @id @default(autoincrement())
+  code   String @unique
+  points Int    @default(20)
+  // Optional admin-facing note, e.g. "Instagram story challenge" - never
+  // shown to the person redeeming, just for your own bookkeeping in /admin.
+  label  String?
+  active Boolean @default(true)
 
-  solves      OsintSolve[]
-  redemptions OsintRedemption[]
-}
+  redemptions CodeRedemption[]
 
-model OsintSession {
-  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-
-  solves OsintSolve[]
 }
 
-// Records that a given anonymous session solved a given challenge. No code
-// lives here - the code is static, on OsintChallenge.
-model OsintSolve {
-  id          String   @id @default(cuid())
-  sessionId   String
-  session     OsintSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  challengeId Int
-  challenge   OsintChallenge @relation(fields: [challengeId], references: [id])
-  solvedAt    DateTime @default(now())
-
-  // One solve record per challenge per anonymous session - re-visiting a
-  // solved challenge is idempotent rather than creating duplicates.
-  @@unique([sessionId, challengeId])
-}
-
-// Records that a given USER has redeemed a given challenge's code. Since the
-// code is shared/static (not per-person), "already redeemed" is scoped per
-// user, not globally - many different people can each redeem the same code
-// once, but nobody can redeem the same challenge twice.
-model OsintRedemption {
-  id          String   @id @default(cuid())
+// Records that a given USER has redeemed a given code. Since a code can be
+// handed out to many people (it's not minted per person), "already
+// redeemed" is scoped per user, not global - many different people can
+// each redeem the same code once, but nobody can redeem it twice.
+model CodeRedemption {
+  id          String    @id @default(cuid())
   userId      String
-  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  challengeId Int
-  challenge   OsintChallenge @relation(fields: [challengeId], references: [id])
-  redeemedAt  DateTime @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bonusCodeId Int
+  bonusCode   BonusCode @relation(fields: [bonusCodeId], references: [id])
+  redeemedAt  DateTime  @default(now())
 
-  @@unique([userId, challengeId])
+  @@unique([userId, bonusCodeId])
 }

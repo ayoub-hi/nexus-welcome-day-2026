@@ -17,19 +17,16 @@ async function main() {
     console.log(`==> Seeded ${questions.length} questions.`);
   }
 
-  const osintPath = path.join(__dirname, "osint-challenges.json");
-  const osintChallenges = JSON.parse(fs.readFileSync(osintPath, "utf-8")).map((c) => ({
-    ...c,
-    answers: JSON.stringify(c.answers),
-  }));
+  const bonusCodesPath = path.join(__dirname, "bonus-codes.json");
+  const bonusCodes = JSON.parse(fs.readFileSync(bonusCodesPath, "utf-8"));
 
-  const existingOsintCount = await prisma.osintChallenge.count();
-  if (existingOsintCount > 0) {
-    console.log(`==> OsintChallenge table already has ${existingOsintCount} rows, skipping seed.`);
+  const existingCodesCount = await prisma.bonusCode.count();
+  if (existingCodesCount > 0) {
+    console.log(`==> BonusCode table already has ${existingCodesCount} rows, skipping seed.`);
   } else {
-    await prisma.osintChallenge.createMany({ data: osintChallenges });
-    console.log(`==> Seeded ${osintChallenges.length} OSINT challenges.`);
-    console.log('    Remember to replace the placeholder "REPLACE ME" content before the event!');
+    await prisma.bonusCode.createMany({ data: bonusCodes });
+    console.log(`==> Seeded ${bonusCodes.length} bonus codes.`);
+    console.log('    Remember to replace the placeholder "REPLACE ME" labels, or add your own via npm run code:add.');
   }
 }
 

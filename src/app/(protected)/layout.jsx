@@ -41,7 +41,7 @@ function LoadingScreen({ message }) {
 }
 
 // NOTE: this layout deliberately does NOT gate on the live game status.
-// /form (profile setup + OSINT code redemption) needs to be reachable any
+// /form (profile setup + bonus code redemption) needs to be reachable any
 // time after login, including before the event opens - that's the whole
 // point of "redeem your code to get points from the get-go". Only /quizz
 // itself checks the game status, right before it would start an attempt.

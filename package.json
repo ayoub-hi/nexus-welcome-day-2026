@@ -11,7 +11,8 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "node prisma/seed.js",
     "db:reset": "prisma migrate reset --force",
-    "admin:set": "node scripts/set-admin.js"
+    "admin:set": "node scripts/set-admin.js",
+    "code:add": "node scripts/add-code.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

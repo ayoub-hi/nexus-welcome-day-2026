@@ -14,6 +14,8 @@ export async function OPTIONS(request) {
   return corsPreflight(request);
 }
 
+// No ordering requirement anymore - each challenge is reachable only via
+// its own QR code/URL, so whichever one someone finds first is fair game.
 export async function POST(request) {
   const origin = request.headers.get("origin");
   const sessionId = await getOrCreateOsintSession(request);
@@ -44,21 +46,13 @@ export async function POST(request) {
 
   const { challengeId, answer } = parsed.data;
 
-  const challenges = await prisma.osintChallenge.findMany({ where: { active: true }, orderBy: { order: "asc" } });
-  const solves = await prisma.osintSolve.findMany({ where: { sessionId }, select: { challengeId: true } });
-  const solvedIds = new Set(solves.map((s) => s.challengeId));
-
-  const currentChallenge = challenges.find((c) => !solvedIds.has(c.id)) || null;
-
-  // Reject anything that isn't exactly the one challenge this session is
-  // currently allowed to attempt - this is what enforces "one after the
-  // other" server-side, not just in the UI.
-  if (!currentChallenge || currentChallenge.id !== challengeId) {
-    const res = withCors(jsonError("This challenge isn't currently available to you.", 403), origin);
+  const challenge = await prisma.osintChallenge.findUnique({ where: { id: challengeId } });
+  if (!challenge || !challenge.active) {
+    const res = withCors(jsonError("This challenge isn't available.", 404), origin);
     return attachOsintSessionCookie(res, sessionId);
   }
 
-  const correct = isCorrectAnswer(answer, currentChallenge.answers);
+  const correct = isCorrectAnswer(answer, challenge.answers);
 
   if (!correct) {
     const res = withCors(NextResponse.json({ correct: false }), origin);
@@ -67,7 +61,7 @@ export async function POST(request) {
 
   try {
     await prisma.osintSolve.create({
-      data: { sessionId, challengeId: currentChallenge.id },
+      data: { sessionId, challengeId: challenge.id },
     });
   } catch (e) {
     // Unique constraint race (double-submit) - fine, someone else's request
@@ -76,7 +70,7 @@ export async function POST(request) {
   }
 
   const res = withCors(
-    NextResponse.json({ correct: true, code: currentChallenge.code, points: currentChallenge.points }),
+    NextResponse.json({ correct: true, code: challenge.code, points: challenge.points }),
     origin
   );
   return attachOsintSessionCookie(res, sessionId);

@@ -79,7 +79,7 @@ export async function POST(request) {
     }),
     prisma.user.update({
       where: { id: user.id },
-      // increment, not set - a user may already have OSINT bonus points
+      // increment, not set - a user may already have bonus points
       // from before the event even started, and this must not erase them.
       data: { points: { increment: score }, played: true },
     }),

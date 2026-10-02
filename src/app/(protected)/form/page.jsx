@@ -20,7 +20,7 @@ function RedeemCodeCard() {
     setSubmitting(true);
     setError("");
     try {
-      const result = await api.post("/api/osint/redeem", { code: code.trim() });
+      const result = await api.post("/api/codes/redeem", { code: code.trim() });
       setRedeemed((r) => [...r, { code: code.trim().toUpperCase(), points: result.pointsAwarded }]);
       setCode("");
     } catch (err) {
@@ -34,10 +34,11 @@ function RedeemCodeCard() {
     <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 max-w-md w-full text-white">
       <div className="flex items-center gap-2 mb-3">
         <Gift className="w-5 h-5 text-green-400" />
-        <h3 className="font-semibold">Got an OSINT code?</h3>
+        <h3 className="font-semibold">Got a bonus code?</h3>
       </div>
       <p className="text-sm text-gray-400 mb-3">
-        If you solved the pre-event challenges, redeem your code{redeemed.length ? "s" : ""} here for bonus points.
+        If you earned a code from one of our challenges, redeem it{redeemed.length ? "s" : ""} here for bonus
+        points.
       </p>
 
       <div className="flex items-start gap-2 bg-yellow-900/30 border border-yellow-700/50 rounded-lg px-3 py-2 mb-3">
