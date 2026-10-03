@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Trophy, Medal, Award, Eye, RotateCcw } from "lucide-react";
+import Image from "next/image";
+import { Eye, RotateCcw } from "lucide-react";
 import { api, ApiError } from "@/lib/api-client";
 import { YEARS, YEAR_LABELS } from "@/lib/years";
 
@@ -40,9 +41,9 @@ export default function LeaderboardReveal() {
   const done = revealedCount >= total && total > 0;
 
   const rankIcon = (rank) => {
-    if (rank === 1) return <Trophy className="w-5 h-5 text-yellow-400 shrink-0" />;
-    if (rank === 2) return <Medal className="w-5 h-5 text-gray-300 shrink-0" />;
-    if (rank === 3) return <Award className="w-5 h-5 text-orange-400 shrink-0" />;
+    if (rank === 1) return <Image src="/rank-1.svg" alt="1st" width={28} height={28} className="w-7 h-7 shrink-0" />;
+    if (rank === 2) return <Image src="/rank-2.svg" alt="2nd" width={28} height={28} className="w-7 h-7 shrink-0" />;
+    if (rank === 3) return <Image src="/rank-3.svg" alt="3rd" width={28} height={28} className="w-7 h-7 shrink-0" />;
     return null;
   };
 
@@ -50,11 +51,11 @@ export default function LeaderboardReveal() {
     <div className="max-w-2xl mx-auto p-6 sm:p-10">
       <div className="flex items-center justify-between mb-1">
         <h1 className="text-3xl font-bold">Leaderboard reveal · {YEAR_LABELS[year]}</h1>
-        <Link href="/admin" className="text-sm text-zinc-400 hover:text-white">
+        <Link href="/admin" className="text-sm text-gray-500 hover:text-white">
           ← Back to admin
         </Link>
       </div>
-      <p className="text-zinc-400 mb-8">
+      <p className="text-gray-500 mb-8">
         Reveals from last place up to the winner. The list is snapshotted on load — refresh the page for a fresh
         pull if scores changed since.
       </p>
@@ -66,8 +67,8 @@ export default function LeaderboardReveal() {
             onClick={() => setYear(y)}
             className={`px-4 py-2 rounded-xl font-semibold text-sm transition border-2 ${
               year === y
-                ? "border-green-500 bg-green-900/30 text-white"
-                : "border-zinc-700 text-zinc-400 hover:border-zinc-500"
+                ? "border-red-500 bg-red-900/30 text-white"
+                : "border-gray-700 text-gray-500 hover:border-gray-500"
             }`}
           >
             {YEAR_LABELS[y]}
@@ -78,16 +79,16 @@ export default function LeaderboardReveal() {
       {error && <p className="text-red-400 mb-4">{error}</p>}
 
       {!players ? (
-        <p className="text-zinc-400">Loading…</p>
+        <p className="text-gray-500">Loading…</p>
       ) : players.length === 0 ? (
-        <p className="text-zinc-400">No one from {YEAR_LABELS[year]} has played yet.</p>
+        <p className="text-gray-500">No one from {YEAR_LABELS[year]} has played yet.</p>
       ) : (
         <>
           <div className="flex gap-3 mb-6">
             <button
               onClick={() => setRevealedCount((c) => Math.min(c + 1, total))}
               disabled={done}
-              className="flex-1 bg-green-600 hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
+              className="flex-1 bg-red-700 hover:bg-red-800 disabled:opacity-40 disabled:cursor-not-allowed font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
             >
               <Eye className="w-5 h-5" />
               {done ? "All revealed" : revealedCount === 0 ? "Reveal last place" : "Reveal next"}
@@ -95,13 +96,13 @@ export default function LeaderboardReveal() {
             <button
               onClick={() => setRevealedCount(total)}
               disabled={done}
-              className="px-4 bg-zinc-700 hover:bg-zinc-600 disabled:opacity-40 font-semibold rounded-xl transition"
+              className="px-4 bg-gray-700 hover:bg-gray-600 disabled:opacity-40 font-semibold rounded-xl transition"
             >
               Reveal all
             </button>
             <button
               onClick={() => setRevealedCount(0)}
-              className="px-4 bg-zinc-800 hover:bg-zinc-700 font-semibold rounded-xl transition flex items-center gap-2"
+              className="px-4 bg-gray-800 hover:bg-gray-700 font-semibold rounded-xl transition flex items-center gap-2"
               title="Reset reveal (doesn't refetch scores)"
             >
               <RotateCcw className="w-4 h-4" />
@@ -118,24 +119,24 @@ export default function LeaderboardReveal() {
                   className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 ${
                     revealed
                       ? rank <= 3
-                        ? "border-green-500/60 bg-green-900/20"
-                        : "border-zinc-700 bg-zinc-800/50"
-                      : "border-zinc-800 bg-zinc-900"
+                        ? "border-red-500/60 bg-red-900/20"
+                        : "border-gray-700 bg-gray-800/50"
+                      : "border-gray-800 bg-[#0d1117]"
                   }`}
                 >
-                  <span className="w-8 text-center font-bold text-zinc-400">#{rank}</span>
+                  <span className="w-8 text-center font-bold text-gray-500">#{rank}</span>
                   {revealed ? rankIcon(rank) : null}
                   <div className="flex-1 min-w-0">
                     {revealed ? (
                       <>
                         <p className="font-semibold truncate">{player.username || player.name}</p>
-                        <p className="text-xs text-zinc-400 uppercase">{player.year || "—"}</p>
+                        <p className="text-xs text-gray-500 uppercase">{player.year || "—"}</p>
                       </>
                     ) : (
-                      <p className="font-semibold text-zinc-600 tracking-widest">? ? ?</p>
+                      <p className="font-semibold text-gray-700 tracking-widest">? ? ?</p>
                     )}
                   </div>
-                  <span className={`font-bold ${revealed ? "text-green-400" : "text-zinc-700"}`}>
+                  <span className={`font-bold ${revealed ? "text-red-400" : "text-gray-700"}`}>
                     {revealed ? player.points.toLocaleString() : "—"}
                   </span>
                 </li>
@@ -143,7 +144,7 @@ export default function LeaderboardReveal() {
             })}
           </ol>
 
-          <p className="text-center text-zinc-500 text-sm mt-6">
+          <p className="text-center text-gray-600 text-sm mt-6">
             {revealedCount} / {total} revealed
           </p>
         </>

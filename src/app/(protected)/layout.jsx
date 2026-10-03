@@ -6,13 +6,19 @@ import { useSession } from "next-auth/react";
 
 function LoadingScreen({ message }) {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
-      <Image src="/vector.svg" alt="Background" fill priority className="object-cover" />
+    <div
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage: "url(/background-pattern.webp)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/40 z-[1]" />
       <div className="relative z-10 flex flex-col items-center gap-8 px-4 w-full max-w-md">
         <div className="relative">
-          <div className="absolute inset-0 bg-green-500/30 blur-3xl rounded-full animate-pulse" />
-          <div className="relative bg-gray-900 backdrop-blur-sm rounded-full p-8 shadow-2xl">
+          <div className="absolute inset-0 bg-red-500/30 blur-3xl rounded-full animate-pulse" />
+          <div className="relative bg-[#0d1117] backdrop-blur-sm rounded-full p-8 shadow-2xl border border-[#1a1a1a]">
             <Image
               src="/Nexus.png"
               alt="Nexus Club Logo"
@@ -29,9 +35,9 @@ function LoadingScreen({ message }) {
               {message}
             </p>
             <div className="flex gap-1.5 justify-center">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              <span className="w-2 h-2 bg-red-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-2 h-2 bg-red-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-2 h-2 bg-red-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
             </div>
           </div>
         </div>

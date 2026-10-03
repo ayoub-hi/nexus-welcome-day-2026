@@ -25,11 +25,11 @@ export default function AdminLayout({ children }) {
 
   if (status === "loading" || !session?.user?.isAdmin) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-zinc-900 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] text-white">
         <p>Checking access…</p>
       </div>
     );
   }
 
-  return <div className="min-h-screen bg-zinc-900 text-white">{children}</div>;
+  return <div className="min-h-screen bg-[#0a0a0a] text-white">{children}</div>;
 }

@@ -34,35 +34,36 @@ export default function PlayedPage() {
     <div
       className="min-h-screen w-full flex flex-col items-center justify-center relative"
       style={{
-        backgroundImage: "url(/vector.svg)",
+        backgroundImage: "url(/background-pattern.webp)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="relative z-10 flex flex-col items-center gap-6 px-8 py-12 bg-[#1a1c1d] rounded-3xl shadow-2xl max-w-md mx-4">
-        <div className="w-28 h-28 md:w-32 md:h-32 relative bg-gradient-to-br from-gray-900 to-gray-900 rounded-full p-6 shadow-lg">
-          <Image src="/Nexus.png" alt="Nexus Club Logo" fill className="object-contain p-6" />
+      <div className="relative z-10 flex flex-col items-center gap-6 px-8 py-12 bg-[#0d1117] rounded-3xl shadow-2xl max-w-md mx-4 border border-[#1a1a1a]">
+        {/* Victory Graphic */}
+        <div className="w-32 h-32 md:w-40 md:h-40 relative">
+          <Image src="/victory-graphic.webp" alt="Mission Complete" fill className="object-contain" />
         </div>
 
         <div className="text-center space-y-2">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">You're all set!</h1>
-          <p className="text-gray-300 text-sm md:text-base">Thanks for playing the quiz.</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">Mission Complete</h1>
+          <p className="text-gray-400 text-sm md:text-base">System successfully infiltrated.</p>
         </div>
 
         {loading ? (
-          <p className="text-gray-400 text-sm">Loading your score…</p>
+          <p className="text-gray-500 text-sm">Loading your score…</p>
         ) : (
-          <div className="flex items-center gap-3 bg-[#232526] px-6 py-4 rounded-2xl">
+          <div className="flex items-center gap-3 bg-[#111111] px-6 py-4 rounded-2xl border border-[#1a1a1a]">
             <Trophy className="w-8 h-8 text-yellow-400" />
             <div className="text-left">
-              <p className="text-gray-400 text-xs uppercase tracking-wide">Your score</p>
+              <p className="text-gray-500 text-xs uppercase tracking-wide">Your score</p>
               <p className="text-white text-2xl font-bold">{user?.points ?? 0} pts</p>
             </div>
           </div>
         )}
 
-        <p className="text-gray-400 text-xs text-center max-w-xs">
+        <p className="text-gray-500 text-xs text-center max-w-xs">
           Results will be announced by the organizers at the end of the event.
         </p>
       </div>

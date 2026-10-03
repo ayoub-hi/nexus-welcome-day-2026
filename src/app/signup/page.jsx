@@ -55,21 +55,19 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen overflow-hidden p-4">
-      {/* Background Image */}
-      <Image
-        src="/vector.svg"
-        alt="Background pattern"
-        fill
-        className="object-cover opacity-90"
-        priority
-      />
-
+    <div
+      className="relative flex items-center justify-center min-h-screen overflow-hidden p-4"
+      style={{
+        backgroundImage: "url(/background-pattern.webp)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Signup Card */}
-      <div className="relative z-10 bg-[#1a1c1d] backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 md:p-12 w-full max-w-md text-white">
+      <div className="relative z-10 bg-[#0d1117] backdrop-blur-md rounded-3xl shadow-2xl p-6 sm:p-10 md:p-12 w-full max-w-md text-white border border-[#1a1a1a]">
         {/* Club Logo */}
         <div className="flex justify-center mb-6">
-          <div className="bg-gradient-to-br from-gray-900 to-gray-700 p-6 sm:p-4 rounded-full shadow-lg">
+          <div className="bg-[#111111] p-4 sm:p-4 rounded-full shadow-lg border border-[#1a1a1a]">
             <Image
               src="/Nexus.png"
               alt="Nexus Club Logo"
@@ -81,15 +79,15 @@ export default function SignupPage() {
         </div>
 
         {/* Header */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-3 bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
           Create Account
         </h1>
 
         {/* Divider */}
         <div className="flex items-center my-6 sm:my-8">
-          <div className="flex-1 border-t border-gray-600"></div>
-          <span className="px-3 sm:px-4 text-gray-300 text-xs sm:text-sm">Sign up with</span>
-          <div className="flex-1 border-t border-gray-600"></div>
+          <div className="flex-1 border-t border-gray-700"></div>
+          <span className="px-3 sm:px-4 text-gray-400 text-xs sm:text-sm">Sign up with</span>
+          <div className="flex-1 border-t border-gray-700"></div>
         </div>
 
         {/* Google Sign Up Button */}
@@ -120,22 +118,22 @@ export default function SignupPage() {
 
         {/* Divider */}
         <div className="flex items-center my-6">
-          <div className="flex-1 border-t border-gray-600"></div>
-          <span className="px-3 text-gray-300 text-xs sm:text-sm">or use email</span>
-          <div className="flex-1 border-t border-gray-600"></div>
+          <div className="flex-1 border-t border-gray-700"></div>
+          <span className="px-3 text-gray-400 text-xs sm:text-sm">or use email</span>
+          <div className="flex-1 border-t border-gray-700"></div>
         </div>
 
         {!mode ? (
           <div className="flex gap-3">
             <button
               onClick={() => setMode("register")}
-              className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition"
+              className="flex-1 bg-red-700 hover:bg-red-800 text-white font-semibold py-3 rounded-xl transition"
             >
               Sign up
             </button>
             <button
               onClick={() => setMode("login")}
-              className="flex-1 bg-transparent border-2 border-gray-500 hover:border-gray-300 text-white font-semibold py-3 rounded-xl transition"
+              className="flex-1 bg-transparent border-2 border-gray-600 hover:border-gray-400 text-white font-semibold py-3 rounded-xl transition"
             >
               Log in
             </button>
@@ -149,7 +147,7 @@ export default function SignupPage() {
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 border border-gray-500 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 placeholder-gray-400 text-white"
+              className="w-full px-3 py-2.5 border border-gray-600 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 placeholder-gray-500 text-white"
             />
             <input
               type="password"
@@ -159,13 +157,13 @@ export default function SignupPage() {
               placeholder="Password (min 8 characters)"
               value={form.password}
               onChange={handleChange}
-              className="w-full px-3 py-2.5 border border-gray-500 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 placeholder-gray-400 text-white"
+              className="w-full px-3 py-2.5 border border-gray-600 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 placeholder-gray-500 text-white"
             />
             {error && <p className="text-red-400 text-sm">{error}</p>}
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
+              className="w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-3 rounded-xl transition disabled:opacity-50"
             >
               {submitting ? "Please wait…" : mode === "register" ? "Create account" : "Log in"}
             </button>
@@ -183,13 +181,13 @@ export default function SignupPage() {
         )}
 
         {/* Optional: Terms text */}
-        <p className="text-center text-gray-300 text-xs sm:text-sm mt-6">
+        <p className="text-center text-gray-400 text-xs sm:text-sm mt-6">
           By signing up, you agree to our{" "}
-          <a href="#" className="text-emerald-400 hover:underline">
+          <a href="#" className="text-red-400 hover:underline">
             Terms
           </a>{" "}
           and{" "}
-          <a href="#" className="text-emerald-400 hover:underline">
+          <a href="#" className="text-red-400 hover:underline">
             Privacy Policy
           </a>
         </p>

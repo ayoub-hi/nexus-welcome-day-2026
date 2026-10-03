@@ -31,9 +31,9 @@ function RedeemCodeCard() {
   };
 
   return (
-    <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 max-w-md w-full text-white">
+    <div className="bg-[#0d1117] rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 max-w-md w-full text-white border border-[#1a1a1a]">
       <div className="flex items-center gap-2 mb-3">
-        <Gift className="w-5 h-5 text-green-400" />
+        <Gift className="w-5 h-5 text-red-400" />
         <h3 className="font-semibold">Got a bonus code?</h3>
       </div>
       <p className="text-sm text-gray-400 mb-3">
@@ -55,12 +55,12 @@ function RedeemCodeCard() {
           value={code}
           onChange={(e) => setCode(e.target.value)}
           placeholder="e.g. NX-7F3K9QAB"
-          className="flex-1 px-3 py-2 border border-gray-500 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 placeholder-gray-400 text-white font-mono text-sm"
+          className="flex-1 px-3 py-2 border border-gray-600 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 placeholder-gray-500 text-white font-mono text-sm"
         />
         <button
           type="submit"
           disabled={submitting || !code.trim()}
-          className="bg-green-600 hover:bg-green-700 disabled:opacity-50 font-semibold px-4 rounded-lg transition text-sm"
+          className="bg-red-700 hover:bg-red-800 disabled:opacity-50 font-semibold px-4 rounded-lg transition text-sm"
         >
           {submitting ? "…" : "Redeem"}
         </button>
@@ -71,7 +71,7 @@ function RedeemCodeCard() {
       {redeemed.length > 0 && (
         <ul className="mt-3 space-y-1">
           {redeemed.map((r, i) => (
-            <li key={i} className="flex items-center gap-2 text-sm text-green-400">
+            <li key={i} className="flex items-center gap-2 text-sm text-red-400">
               <Check className="w-4 h-4" /> {r.code} redeemed for +{r.points} pts
             </li>
           ))}
@@ -145,36 +145,36 @@ function ProfileForm() {
   };
 
   return (
-    <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-white">
-      <div className="bg-neutral-800 rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+    <div className="bg-[#0d1117] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-white border border-[#1a1a1a]">
+      <div className="bg-[#111111] rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6 border border-[#1a1a1a]">
         <Image src="/Nexus.png" width={48} height={48} alt="nexus" className="w-10 h-10 sm:w-12 sm:h-12" />
       </div>
       <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 text-center">Registration Form</h2>
-      <p className="text-sm sm:text-base text-white mb-5 sm:mb-6 text-center">
+      <p className="text-sm sm:text-base text-gray-400 mb-5 sm:mb-6 text-center">
         Please fill in your information to continue
       </p>
 
       <form onSubmit={handleFormSubmit} className="space-y-4 text-white">
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Username</label>
+          <label className="block text-sm font-medium text-gray-300 mb-1">Username</label>
           <input
             type="text"
             name="username"
             value={formData.username}
             onChange={handleFormChange}
-            className="w-full px-3 py-2 border border-gray-500 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 placeholder-gray-400 text-white"
+            className="w-full px-3 py-2 border border-gray-600 bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 placeholder-gray-500 text-white"
             placeholder="Enter your username"
           />
           {formErrors.username && <p className="text-red-500 text-sm mt-1">{formErrors.username}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Year</label>
+          <label className="block text-sm font-medium text-gray-300 mb-1">Year</label>
           <select
             name="year"
             value={formData.year}
             onChange={handleFormChange}
-            className="w-full px-3 py-2 border border-gray-500 bg-[#1c1c1d] rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 text-white [&>option]:bg-[#1c1c1d] [&>option]:text-white"
+            className="w-full px-3 py-2 border border-gray-600 bg-[#0d1117] rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 text-white [&>option]:bg-[#0d1117] [&>option]:text-white"
           >
             <option value="">Select your year</option>
             <option value="1cp">1CP</option>
@@ -183,7 +183,7 @@ function ProfileForm() {
             <option value="2cs">2CS</option>
             <option value="3cs">3CS</option>
           </select>
-          <p className="text-xs text-gray-400 mt-1">Your year decides your questions and leaderboard, and can't be changed once you start.</p>
+          <p className="text-xs text-gray-500 mt-1">Your year decides your questions and leaderboard, and can't be changed once you start.</p>
           {formErrors.year && <p className="text-red-500 text-sm mt-1">{formErrors.year}</p>}
         </div>
 
@@ -192,7 +192,7 @@ function ProfileForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 sm:py-4 px-5 sm:px-6 rounded-lg transition text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-3 sm:py-4 px-5 sm:px-6 rounded-lg transition text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
@@ -205,7 +205,14 @@ export default function FormPage() {
   const gameStatus = useGameStatus();
 
   return (
-    <div className="min-h-screen bg-[url('/vector.svg')] bg-cover bg-center flex flex-col items-center justify-center gap-4 p-3 sm:p-4">
+    <div
+      className="min-h-screen flex flex-col items-center justify-center gap-4 p-3 sm:p-4"
+      style={{
+        backgroundImage: "url(/background-pattern.webp)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Redeem card is available before and during the event, but not once
           it's ended - the redemption window closes with the event. */}
       {gameStatus !== null && gameStatus !== "ended" && <RedeemCodeCard />}
@@ -214,13 +221,13 @@ export default function FormPage() {
       {gameStatus === "open" && <ProfileForm />}
 
       {gameStatus === "not_started" && (
-        <p className="text-gray-400 text-sm text-center max-w-md">
+        <p className="text-gray-500 text-sm text-center max-w-md">
           The rest of the sign-up will appear here once the event starts.
         </p>
       )}
 
       {gameStatus === "ended" && (
-        <p className="text-gray-400 text-sm text-center max-w-md">The event has ended.</p>
+        <p className="text-gray-500 text-sm text-center max-w-md">The event has ended.</p>
       )}
     </div>
   );

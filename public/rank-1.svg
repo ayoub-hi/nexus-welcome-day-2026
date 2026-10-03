@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <!-- Outer Hex Shield (Gold #fbbf24) -->
+  <polygon points="64,8 114,36 114,92 64,120 14,92 14,36" fill="#0a0a0a" stroke="#fbbf24" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Inner Shield Layer -->
+  <polygon points="64,16 106,40 106,88 64,112 22,88 22,40" fill="#111111" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Circuit Trace Nodes -->
+  <g stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M 28,44 L 44,44 L 52,52"/>
+    <circle cx="28" cy="44" r="2.5" fill="#fbbf24" stroke="none"/>
+    
+    <path d="M 100,44 L 84,44 L 76,52"/>
+    <circle cx="100" cy="44" r="2.5" fill="#fbbf24" stroke="none"/>
+
+    <path d="M 28,84 L 44,84 L 52,76"/>
+    <circle cx="28" cy="84" r="2.5" fill="#fbbf24" stroke="none"/>
+
+    <path d="M 100,84 L 84,84 L 76,76"/>
+    <circle cx="100" cy="84" r="2.5" fill="#fbbf24" stroke="none"/>
+  </g>
+
+  <!-- Terminal Font Center Glyph -->
+  <text x="64" y="78" font-family="'Courier New', monospace" font-size="46" font-weight="900" fill="#fbbf24" text-anchor="middle">1</text>
+</svg>

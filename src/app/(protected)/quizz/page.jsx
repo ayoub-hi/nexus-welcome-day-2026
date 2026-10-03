@@ -162,7 +162,7 @@ const CyberQuizApp = () => {
   // --- Render ---------------------------------------------------------------
   if (phase === "loading" || phase === "submitting") {
     return (
-      <div className="h-screen flex items-center justify-center bg-zinc-900 text-white">
+      <div className="h-screen flex items-center justify-center bg-[#0a0a0a] text-white">
         <p className="text-lg">{phase === "submitting" ? "Submitting your answers..." : "Loading quiz..."}</p>
       </div>
     );
@@ -170,12 +170,12 @@ const CyberQuizApp = () => {
 
   if (phase === "error") {
     return (
-      <div className="h-screen flex items-center justify-center bg-zinc-900 text-white p-4">
-        <div className="bg-[#1c1c1d] rounded-2xl p-8 max-w-md text-center">
+      <div className="h-screen flex items-center justify-center bg-[#0a0a0a] text-white p-4">
+        <div className="bg-[#0d1117] rounded-2xl p-8 max-w-md text-center border border-[#1a1a1a]">
           <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-green-600 hover:bg-green-700 px-5 py-2.5 rounded-lg font-semibold"
+            className="bg-red-700 hover:bg-red-800 px-5 py-2.5 rounded-lg font-semibold"
           >
             Retry
           </button>
@@ -186,20 +186,27 @@ const CyberQuizApp = () => {
 
   if (phase === "intro") {
     return (
-      <div className="h-screen bg-[url('/vector.svg')] bg-cover bg-center flex items-center justify-center p-3 sm:p-4 overflow-hidden">
-        <div className="bg-[#1c1c1d] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center max-h-[95vh] overflow-y-auto text-white">
-          <div className="bg-neutral-800 rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+      <div
+        className="h-screen flex items-center justify-center p-3 sm:p-4 overflow-hidden"
+        style={{
+          backgroundImage: "url(/background-pattern.webp)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="bg-[#0d1117] rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center max-h-[95vh] overflow-y-auto text-white border border-[#1a1a1a]">
+          <div className="bg-[#111111] rounded-full w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mx-auto mb-4 sm:mb-6 border border-[#1a1a1a]">
             <Image src="/Nexus.png" width={48} height={48} alt="nexus" className="w-10 h-10 sm:w-12 sm:h-12" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Cyber Security Quiz</h2>
-          <p className="text-sm sm:text-base text-white mb-5 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">System Infiltration Test</h2>
+          <p className="text-sm sm:text-base text-gray-400 mb-5 sm:mb-6">
             Test your knowledge with {questions.length} questions.
             <br />
             The timer starts the moment you click start, and keeps running even if you leave the page.
           </p>
           <button
             onClick={startQuiz}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 sm:py-4 px-5 sm:px-6 rounded-lg transition flex items-center justify-center gap-2 text-base sm:text-lg"
+            className="w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-3 sm:py-4 px-5 sm:px-6 rounded-lg transition flex items-center justify-center gap-2 text-base sm:text-lg"
           >
             <Play className="w-5 h-5 sm:w-6 sm:h-6" />
             Start Quiz
@@ -214,23 +221,30 @@ const CyberQuizApp = () => {
   const seconds = timeLeft % 60;
 
   return (
-    <div className="h-screen bg-[url('/vector.svg')] bg-cover bg-center flex items-center justify-center p-3 sm:p-4 overflow-hidden">
-      <div className="bg-[#1c1c1d] text-white rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-2xl w-full max-h-[95vh] overflow-y-auto">
+    <div
+      className="h-screen flex items-center justify-center p-3 sm:p-4 overflow-hidden"
+      style={{
+        backgroundImage: "url(/background-pattern.webp)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="bg-[#0d1117] text-white rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-2xl w-full max-h-[95vh] overflow-y-auto border border-[#1a1a1a]">
         <div className="flex justify-between items-center mb-4 sm:mb-6">
-          <div className="text-xs sm:text-sm font-semibold text-white">
+          <div className="text-xs sm:text-sm font-semibold text-gray-300">
             Question {currentIndex + 1}/{questions.length}
           </div>
           <div className="flex items-center gap-1 sm:gap-2">
-            <Clock className={`w-4 h-4 sm:w-5 sm:h-5 ${timeLeft <= 30 ? "text-red-500" : "text-green-500"}`} />
-            <span className={`text-lg sm:text-2xl font-bold ${timeLeft <= 30 ? "text-red-500" : "text-green-500"}`}>
+            <Clock className={`w-4 h-4 sm:w-5 sm:h-5 ${timeLeft <= 30 ? "text-red-500" : "text-red-400"}`} />
+            <span className={`text-lg sm:text-2xl font-bold ${timeLeft <= 30 ? "text-red-500 animate-pulse" : "text-red-400"}`}>
               {minutes}:{seconds.toString().padStart(2, "0")}
             </span>
           </div>
         </div>
 
-        <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2 mb-4 sm:mb-6">
+        <div className="w-full bg-gray-800 rounded-full h-1.5 sm:h-2 mb-4 sm:mb-6">
           <div
-            className="bg-green-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
+            className="bg-red-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
             style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
           />
         </div>
@@ -244,8 +258,8 @@ const CyberQuizApp = () => {
             const isSelected = selected === key;
             let buttonClass = "w-full text-left p-3 sm:p-4 rounded-lg border-2 transition-all ";
             buttonClass += isSelected
-              ? "border-blue-500 bg-blue-900"
-              : "border-gray-600 hover:border-blue-400 hover:bg-gray-800";
+              ? "border-red-500 bg-red-900/40"
+              : "border-gray-700 hover:border-red-400 hover:bg-gray-800/50";
 
             return (
               <button
@@ -255,7 +269,7 @@ const CyberQuizApp = () => {
                 className={buttonClass}
               >
                 <div className="flex items-start sm:items-center gap-2 sm:gap-3">
-                  <span className="font-bold text-green-500 text-sm sm:text-base flex-shrink-0">{key}.</span>
+                  <span className="font-bold text-red-500 text-sm sm:text-base flex-shrink-0">{key}.</span>
                   <span className="text-white text-sm sm:text-base text-left">{value}</span>
                 </div>
               </button>
